@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-
 
 /**
  * Various common utilities we needs among several modules

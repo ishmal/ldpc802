@@ -1,6 +1,4 @@
-/* jshint esversion: 6 */
-
-import { CodeTable } from "./codeTable";
+import { CodeTable } from "./codetable";
 import { Crc32 } from "./crc32";
 import { LdpcDecoder } from "./ldpcDecoder";
 import { LdpcEncoder } from "./ldpcEncoder";

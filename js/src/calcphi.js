@@ -29,6 +29,7 @@ function makePhiTable() {
 
 const phiTable = makePhiTable();
 
+/*
 function dumpPhiTable() {
 	let buf = "";
 	let len = phiTable.length;
@@ -45,6 +46,7 @@ function dumpPhiTable() {
 	}
 	console.log(buf);
 }
+*/
 
 function calcPhiTable(x) {
 	if (x >= 7) {

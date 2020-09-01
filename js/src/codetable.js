@@ -1,8 +1,7 @@
-/* jshint esversion: 6 */
-import { codes80211n } from "./ldpc802.11";
+import { Codes802 } from "./codes802";
 
 export class CodeTable {
-	constructor(codes = codes80211n) {
+	constructor(codes = Codes802) {
 		this.codes = codes;
 		this.makeTables();
 	}

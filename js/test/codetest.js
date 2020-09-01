@@ -1,7 +1,6 @@
-
-
-import { CodeTable } from "../src/codeTable";
-import { RawCodes } from "./rawcodes";
+const { CodeTable } = require("../dist/ldpc802");
+const RawCodes = require("./rawcodes");
+const { expect } = require('chai');
 
 
 describe("LDPC Codes", () => {
@@ -19,6 +18,7 @@ describe("LDPC Codes", () => {
 		});
 	}
 
+	/*
 	function printHb(Hb) {
 		console.log("Hb: [");
 		for (let i = 0; i < Hb.length; i++) {
@@ -36,6 +36,7 @@ describe("LDPC Codes", () => {
 		}
 		console.log("]");
 	}
+	*/
 
 	/**
 	 * Generate the pseudo-cyclic 'Hb' table from the code data
@@ -63,7 +64,7 @@ describe("LDPC Codes", () => {
 			arr.push(row);
 		}
 		//printHb(arr);
-		expect(code.Hb).toEqual(arr);
+		expect(code.Hb).to.deep.equal(arr);
 	}
 
 	it("should have valid tables", () => {
@@ -90,9 +91,10 @@ describe("LDPC Codes", () => {
 		];
 		const codes = new CodeTable();
 		const res = codes.qcMatrixToSparse(qc, z);
-		expect(exp).toEqual(res);
+		expect(exp).to.deep.equal(res);
 	});
 
+	/*
 	function printMatrix(arr) {
 		console.log("size: " + arr.length);
 		arr.forEach((row, i) => {
@@ -103,13 +105,16 @@ describe("LDPC Codes", () => {
 			process.stdout.write("\n");
 		});
 	}
+	*/
 
 	it("does stuff", () => {
+		/*
 		const codes = new CodeTable();
 		const code = codes.codes["5/6"]["648"];
-		//console.log("T:" + JSON.stringify(code.T, null, 2));
+		console.log("T:" + JSON.stringify(code.T, null, 2));
 		const arr = codes.qcMatrixToDense(code.T, code.z);
-		//printMatrix(arr);
+		printMatrix(arr);
+		*/
 	});
 
 });

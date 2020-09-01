@@ -31,8 +31,8 @@
 *.out
 *.app
 
-test/testme
 obj
+testobj
 
 .vscode
 

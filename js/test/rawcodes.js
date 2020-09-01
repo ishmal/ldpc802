@@ -1,9 +1,9 @@
 /**
- * hwere we will keep the raw codes from the 801.11n spec for tests, so that
-  they will no add to the memory profile
-*/
+ * Here we will keep the raw codes from the 801.11n spec for tests, so that
+ * they will no add to the memory profile
+ */
 
-export const RawCodes = {
+const RawCodes = {
 	"1/2": {
 		"648": [
 			" 0  -  -  -  0  0  -  -  0  -  -  0  1 0 - - - - - - - - - -",
@@ -128,3 +128,4 @@ export const RawCodes = {
 	}
 };
 
+module.exports = RawCodes;

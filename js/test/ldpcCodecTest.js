@@ -1,5 +1,5 @@
-import { LdpcCodec } from "../src/ldpcCodec";
-
+const { LdpcCodec } = require("../dist/ldpc802");
+const { expect } = require('chai');
 
 
 describe("Ldpc Codec", () => {
@@ -42,7 +42,7 @@ describe("Ldpc Codec", () => {
 	}
 
 	it("constructs properly", () => {
-		expect(() => new LdpcCodec()).not.toThrow();
+		expect(() => new LdpcCodec()).to.not.throw;
 	});
 
 	it("should be able to encode and decode a block of text", () => {
@@ -52,20 +52,19 @@ describe("Ldpc Codec", () => {
 		const analogs = messages.map(m => makeSignal(m));
 		const texts = analogs.map(m => codec.decodeText(m));
 		const wholeText = texts.join("");
-		expect(wholeText).toEqual(raven);
+		expect(wholeText).to.equal(raven);
 	});
 
 	it("should be able to encode and decode a block of text in a dirty world", () => {
 		const codec = new LdpcCodec();
 		codec.setCode("1/2", "648");
-		debugger;
 		const messages = codec.encodeText(raven);
 		const withErrors = messages.map(m => addErrors(m, 40));
 		const analogs = withErrors.map(m => makeSignal(m));
 		const noisy = analogs.map(m => addNoise(m, 0.2));
 		const texts = noisy.map(m => codec.decodeText(m));
 		const wholeText = texts.join("");
-		expect(wholeText).toEqual(raven);
+		expect(wholeText).to.equal(raven);
 	});
 
 

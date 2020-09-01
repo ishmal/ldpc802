@@ -429,7 +429,7 @@ const final1 = [
 
 
 
-export const Data = {
+const Data = {
     encoded1,
     final1,
     fullText,
@@ -442,3 +442,5 @@ export const Data = {
     shortened1,
     TXVECTOR1
 };
+
+module.exports = Data;

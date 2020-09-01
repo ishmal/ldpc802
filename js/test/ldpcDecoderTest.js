@@ -1,8 +1,7 @@
+const { CodeTable, LdpcDecoder, LdpcEncoder } = require("../dist/ldpc802");
+const { expect } = require('chai');
 
-import * as mathjs from "mathjs";
-import { CodeTable } from "../src/codeTable";
-import { LdpcDecoder } from "../src/ldpcDecoder";
-import { LdpcEncoder } from "../src/ldpcEncoder";
+const math = require("mathjs");
 
 /*
 0 1 0 1 1 0 0 1
@@ -58,22 +57,22 @@ describe("LDPC Decoder", () => {
 	}
 
 	it("should construct without exception", () => {
-		expect(() => new LdpcDecoder(code)).not.toThrow();
+		expect(() => new LdpcDecoder(code)).to.not.throw;
 	});
 
 	it("should calculate variance properly", () => {
 		const rawmsg = makeMessage(1000);
 		const msg = addNoise(rawmsg, 0.1);
-		const variance = LdpcDecoder.calcVariance(msg);
-		const exp = mathjs.var(msg);
-		expect(variance).toBeCloseTo(exp, 7);
+		const res = LdpcDecoder.calcVariance(msg);
+		const exp = math.variance(msg);
+		expect(res).to.be.closeTo(exp, 7);
 	});
 
 	it("should create tanner tables", () => {
 		const dec = new LdpcDecoder(code);
-		expect(dec.code).toEqual(code);
-		expect(dec.checkNodes).toBeDefined();
-		expect(dec.variableNodes).toBeDefined();
+		expect(dec.code).to.equal(code);
+		expect(dec.checkNodes).to.exist;
+		expect(dec.variableNodes).to.exist;
 	});
 
 	it("should have all unique check table references", () => {
@@ -82,9 +81,9 @@ describe("LDPC Decoder", () => {
 		const code = table.codes["1/2"]["648"];
 		const dec = new LdpcDecoder(code);
 		const checkNodeSet = new Set(dec.checkNodes);
-		expect(checkNodeSet.size).toEqual(code.M);
+		expect(checkNodeSet.size).to.equal(code.M);
 		const variableNodeSet = new Set(dec.variableNodes);
-		expect(variableNodeSet.size).toEqual(code.N);
+		expect(variableNodeSet.size).to.equal(code.N);
 	});
 
 	it("should decode what the encoder encodes", () => {
@@ -93,11 +92,11 @@ describe("LDPC Decoder", () => {
 		const msg = makeMessage(code.messageBits);
 		const enc = new LdpcEncoder(code);
 		const codeword = enc.encode(msg);
-		expect(codeword.length).toEqual(code.N);
+		expect(codeword.length).to.equal(code.N);
 		const dec = new LdpcDecoder(code);
 		const signal = makeSignal(codeword);
 		const res = dec.decode(signal);
-		expect(res).toEqual(msg);
+		expect(res).to.deep.equal(msg);
 	});
 
 	it("should decode with noise added", () => {
@@ -106,12 +105,12 @@ describe("LDPC Decoder", () => {
 		const msg = makeMessage(code.messageBits);
 		const enc = new LdpcEncoder(code);
 		const codeword = enc.encode(msg);
-		expect(codeword.length).toEqual(code.N);
+		expect(codeword.length).to.equal(code.N);
 		const signal = makeSignal(codeword);
 		const received = addNoise(signal, 0.1);
 		const dec = new LdpcDecoder(code);
 		const res = dec.decode(received);
-		expect(res).toEqual(msg);
+		expect(res).to.deep.equal(msg);
 	});
 
 	it("should decode with errors added", () => {
@@ -120,12 +119,12 @@ describe("LDPC Decoder", () => {
 		const msg = makeMessage(code.messageBits);
 		const enc = new LdpcEncoder(code);
 		const codeword = enc.encode(msg);
-		expect(codeword.length).toEqual(code.N);
+		expect(codeword.length).to.equal(code.N);
 		const withErrors = addErrors(codeword, 8);
 		const signal = makeSignal(withErrors);
 		const received = addNoise(signal, 0.1);
 		const dec = new LdpcDecoder(code);
 		const res = dec.decode(received);
-		expect(res).toEqual(msg);
+		expect(res).to.deep.equal(msg);
 	});
 });

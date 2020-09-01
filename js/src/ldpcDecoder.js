@@ -1,5 +1,9 @@
-import { calcPhi } from "./calcphi";
-import { Util } from "./util";
+import {
+	calcPhi
+} from "./calcphi";
+import {
+	Util
+} from "./util";
 
 const multiplySparse = Util.multiplySparse;
 
@@ -24,15 +28,15 @@ export class LdpcDecoder {
 		const n = samples.length;
 		let m = 0;
 		let s = 0;
-		for (let k = 0; k < n; ) {
+		for (let k = 0; k < n;) {
 			const x = samples[k++];
 			const oldM = m;
 			m += (x - m) / k;
 			s += (x - m) * (x - oldM);
 		}
-	  return s / (n - 1);
+		return s / (n - 1);
 	}
-	
+
 
 
 	/**
@@ -93,8 +97,8 @@ export class LdpcDecoder {
 		for (let i = 0; i < M; i++) {
 			const row = H[i];
 			const vlinks = row.map(idx => ({
-					v: variableNodes[idx],
-					r: 0
+				v: variableNodes[idx],
+				r: 0
 			}));
 			const cnode = {
 				vlinks
@@ -143,7 +147,7 @@ export class LdpcDecoder {
 		 * Then interconnect then with link records,
 		 * using the sparse array information from H
 		 */
-		for (let i = 0 ; i < M; i++) {
+		for (let i = 0; i < M; i++) {
 			const row = H[i];
 			const cnode = checkNodes[i];
 			const rlen = row.length;
@@ -202,10 +206,10 @@ export class LdpcDecoder {
 			vnode.ci = Lci;
 			const links = vnode.links;
 			const llen = links.length;
-			for (let j = 0; j < llen ; j++) {
+			for (let j = 0; j < llen; j++) {
 				const link = links[j];
-				link.r = 0;				
-				link.q = Lci;				
+				link.r = 0;
+				link.q = Lci;
 			}
 		}
 
@@ -220,7 +224,7 @@ export class LdpcDecoder {
 				const links = checkNode.links;
 				const llen = links.length;
 
-				for (let i = 0; i < llen ; i++) {
+				for (let i = 0; i < llen; i++) {
 					const rlink = links[i];
 					/**
 					 * Sum and product for links !== i
@@ -266,12 +270,12 @@ export class LdpcDecoder {
 			 * Step 4.  Check syndrome
 			 */
 			const c = [];
-			for (let i = 0; i < N ; i++) {
+			for (let i = 0; i < N; i++) {
 				const vnode = variableNodes[i];
 				const links = vnode.links;
 				const llen = links.length;
 				let sum = 0;
-				for (let v = 0 ; v < llen ; v++) {
+				for (let v = 0; v < llen; v++) {
 					const link = links[v];
 					sum += link.r;
 				}
