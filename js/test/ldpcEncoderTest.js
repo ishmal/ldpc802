@@ -1,6 +1,6 @@
-const { CodeTable, LdpcEncoder, Util } = require("../dist/ldpc802");
-const { expect } = require('chai');
-const Data = require("./testdata");
+import { CodeTable, LdpcEncoder, Util } from "../dist/ldpc802.js";
+import { expect } from 'chai';
+import { Data } from "./testdata.js";
 
 describe("LDPC Encoder", () => {
 	it("should construct without throwing", () => {

@@ -443,4 +443,4 @@ const Data = {
     TXVECTOR1
 };
 
-module.exports = Data;
+export { Data };

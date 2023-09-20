@@ -1,7 +1,7 @@
-const { Util } = require("../dist/ldpc802");
-const { expect } = require('chai');
+import { Util } from "../dist/ldpc802.js";
+import { expect } from 'chai';
 
-const Data = require("./testdata");
+import { Data } from "./testdata.js";
 
 
 describe("Util", () => {

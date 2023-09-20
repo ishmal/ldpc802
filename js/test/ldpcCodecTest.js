@@ -1,5 +1,5 @@
-const { LdpcCodec } = require("../dist/ldpc802");
-const { expect } = require('chai');
+import { LdpcCodec } from "../dist/ldpc802.js";
+import { expect } from 'chai';
 
 
 describe("Ldpc Codec", () => {

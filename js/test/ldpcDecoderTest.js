@@ -1,7 +1,7 @@
-const { CodeTable, LdpcDecoder, LdpcEncoder } = require("../dist/ldpc802");
-const { expect } = require('chai');
+import { CodeTable, LdpcDecoder, LdpcEncoder } from "../dist/ldpc802.js";
+import { expect } from 'chai';
 
-const math = require("mathjs");
+import { variance } from "mathjs";
 
 /*
 0 1 0 1 1 0 0 1
@@ -64,7 +64,7 @@ describe("LDPC Decoder", () => {
 		const rawmsg = makeMessage(1000);
 		const msg = addNoise(rawmsg, 0.1);
 		const res = LdpcDecoder.calcVariance(msg);
-		const exp = math.variance(msg);
+		const exp = variance(msg);
 		expect(res).to.be.closeTo(exp, 7);
 	});
 

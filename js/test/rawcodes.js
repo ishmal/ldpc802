@@ -128,4 +128,4 @@ const RawCodes = {
 	}
 };
 
-module.exports = RawCodes;
+export { RawCodes };

@@ -1,6 +1,6 @@
-const { CodeTable } = require("../dist/ldpc802");
-const RawCodes = require("./rawcodes");
-const { expect } = require('chai');
+import { CodeTable } from "../dist/ldpc802.js";
+import { RawCodes } from "./rawcodes.js";
+import { expect } from 'chai';
 
 
 describe("LDPC Codes", () => {

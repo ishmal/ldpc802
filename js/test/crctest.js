@@ -1,5 +1,5 @@
-const { Crc32 } = require("../dist/ldpc802");
-const { expect } = require('chai');
+import { Crc32 } from "../dist/ldpc802.js";
+import { expect } from 'chai';
 
 describe("CRC32 tests", function () {
 
