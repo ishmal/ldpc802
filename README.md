@@ -1,2 +1,2 @@
 # ldpc802
-New repository for LDPC related things
+Repository for experimenting with Low Density Parity Check codes.  Different language implementations will be gathered here.
