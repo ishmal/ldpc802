@@ -4,13 +4,13 @@ import { Util } from "./util";
 const multiplySparse = Util.multiplySparse;
 const substituteSparse = Util.substituteSparse;
 
-function add(a, b) {
+const add = (a, b) => {
 	const arr = [];
 	for (let i=0, len = a.length; i < len ; i++) {
 		arr[i] = a[i] ^ b[i];
 	}
 	return arr;
-}
+};
 
 /**
  * Encoder for 802.11n/ac QC codes
