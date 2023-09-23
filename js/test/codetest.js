@@ -7,7 +7,7 @@ describe("LDPC Codes", () => {
 	/**
 	 * Generate our encoding and decoding tables
 	 */
-	function validateTables() {
+	const validateTables = () => {
 		const codes = new CodeTable().codes;
 		Object.keys(codes).forEach(rate => {
 			const rateObj = codes[rate];
@@ -16,10 +16,10 @@ describe("LDPC Codes", () => {
 				validateHb(code, rate, length);
 			});
 		});
-	}
+	};
 
 	/*
-	function printHb(Hb) {
+	const printHb = (Hb) -> {
 		console.log("Hb: [");
 		for (let i = 0; i < Hb.length; i++) {
 			const row = Hb[i];
@@ -35,14 +35,14 @@ describe("LDPC Codes", () => {
 			console.log(s);
 		}
 		console.log("]");
-	}
+	};
 	*/
 
 	/**
 	 * Generate the pseudo-cyclic 'Hb' table from the code data
 	 * @param {object} code one of the blocks in "lengths" in the code table,  for example, "648"
 	 */
-	function validateHb(code, rate, length) {
+	const validateHb = (code, rate, length) => {
 		const arr = [];
 		//console.log("rate: " + rate);
 		const source = RawCodes[rate][length];
@@ -65,7 +65,7 @@ describe("LDPC Codes", () => {
 		}
 		//printHb(arr);
 		expect(code.Hb).to.deep.equal(arr);
-	}
+	};
 
 	it("should have valid tables", () => {
 		validateTables();
@@ -95,7 +95,7 @@ describe("LDPC Codes", () => {
 	});
 
 	/*
-	function printMatrix(arr) {
+	const printMatrix = (arr) => {
 		console.log("size: " + arr.length);
 		arr.forEach((row, i) => {
 			process.stdout.write(i.toString().padStart(2) + ":");
@@ -104,7 +104,7 @@ describe("LDPC Codes", () => {
 			});
 			process.stdout.write("\n");
 		});
-	}
+	};
 	*/
 
 	it("does stuff", () => {

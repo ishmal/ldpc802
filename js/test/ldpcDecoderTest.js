@@ -14,29 +14,29 @@ const code = {
 	M: 4,
 	N: 8,
 	H: [
-		[1,3,4,7],
-		[0,1,2,5],
-		[2,5,6,7],
-		[0,3,4,6]
+		[1, 3, 4, 7],
+		[0, 1, 2, 5],
+		[2, 5, 6, 7],
+		[0, 3, 4, 6]
 	]
 };
 
 describe("LDPC Decoder", () => {
 
-	function makeMessage(size) {
+	const makeMessage = (size) => {
 		const msg = [];
-		for (let i = 0 ; i < size ; i++) {
+		for (let i = 0; i < size; i++) {
 			const toss = Math.random();
 			msg[i] = toss > 0.5 ? 1 : 0;
 		}
 		return msg;
-	}
+	};
 
-	function makeSignal(array) {
+	const makeSignal = (array) => {
 		return array.map(x => x < 0.5 ? 1 : -1);
-	}
+	};
 
-	function addErrors(message, nrBits) {
+	const addErrors = (message, nrBits) => {
 		const arr = message.slice();
 		const len = arr.length;
 		for (let i = 0; i < nrBits; i++) {
@@ -44,9 +44,9 @@ describe("LDPC Decoder", () => {
 			arr[i] = arr[index] ^ 1;
 		}
 		return arr;
-	}
+	};
 
-	function addNoise(message, level) {
+	const addNoise = (message, level) => {
 		const out = [];
 		const len = message.length;
 		for (let i = 0; i < len; i++) {
@@ -54,7 +54,7 @@ describe("LDPC Decoder", () => {
 			out[i] = message[i] + noise;
 		}
 		return out;
-	}
+	};
 
 	it("should construct without exception", () => {
 		expect(() => new LdpcDecoder(code)).to.not.throw;

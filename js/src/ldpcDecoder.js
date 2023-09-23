@@ -1,9 +1,5 @@
-import {
-	calcPhi
-} from "./calcphi";
-import {
-	Util
-} from "./util";
+import { calcPhi } from "./calcphi";
+import { Util} from "./util";
 
 const multiplySparse = Util.multiplySparse;
 

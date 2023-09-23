@@ -17,11 +17,11 @@ describe("Ldpc Codec", () => {
 	 * The binary 1's and 0's live at -1 and 1 in the analog world
 	 * @param {array} array to convert
 	 */
-	function makeSignal(array) {
+	const makeSignal = (array) => {
 		return array.map(x => x < 0.5 ? 1 : -1);
-	}
+	};
 
-	function addErrors(message, nrBits) {
+	const addErrors = (message, nrBits) => {
 		const arr = message.slice();
 		const len = arr.length;
 		for (let i = 0; i < nrBits; i++) {
@@ -29,9 +29,9 @@ describe("Ldpc Codec", () => {
 			arr[index] = arr[index] ^ 1;
 		}
 		return arr;
-	}
+	};
 
-	function addNoise(message, level) {
+	const addNoise = (message, level) => {
 		const out = [];
 		const len = message.length;
 		for (let i = 0; i < len; i++) {
@@ -39,7 +39,7 @@ describe("Ldpc Codec", () => {
 			out[i] = message[i] + noise;
 		}
 		return out;
-	}
+	};
 
 	it("constructs properly", () => {
 		expect(() => new LdpcCodec()).to.not.throw;

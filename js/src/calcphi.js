@@ -4,18 +4,18 @@
  * phi(x) = log((exp(x) + 1) / (exp(x) - 1))
  */
 
-function calcPhiSlow(x) {
+const calcPhiSlow = (x) => {
 	x = Math.max(x, 1e-10);
 	const expx = Math.exp(x);
 	const v = Math.log((expx + 1) / (expx - 1));
 	return v;
-}
+};
 
 const PHI_TABLE_SIZE = 1024;
 const PHI_TABLE_RANGE = 7;
 const PHI_TABLE_SCALE = PHI_TABLE_SIZE / PHI_TABLE_RANGE;
 
-function makePhiTable() {
+const makePhiTable = () => {
 	const delta = PHI_TABLE_RANGE / PHI_TABLE_SIZE;
 	const table = [];
 	let x = delta; //avoid the asymptote
@@ -25,12 +25,12 @@ function makePhiTable() {
 		//console.log(`${x}: ${v}`);
 	}
 	return table;
-}
+};
 
 const phiTable = makePhiTable();
 
 /*
-function dumpPhiTable() {
+const dumpPhiTable = () => {
 	let buf = "";
 	let len = phiTable.length;
 	let col = 0;
@@ -45,16 +45,16 @@ function dumpPhiTable() {
 		}
 	}
 	console.log(buf);
-}
+};
 */
 
-function calcPhiTable(x) {
+const calcPhiTable = (x) => {
 	if (x >= 7) {
 		return 0;
 	}
 	const idx = (x * PHI_TABLE_SCALE) | 0;
 	return phiTable[idx];
-}
+};
 
 export const calcPhi = calcPhiTable;
 
