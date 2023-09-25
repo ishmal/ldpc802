@@ -18,11 +18,11 @@ const PHI_TABLE_SCALE = PHI_TABLE_SIZE / PHI_TABLE_RANGE;
 const makePhiTable = () => {
 	const delta = PHI_TABLE_RANGE / PHI_TABLE_SIZE;
 	const table = [];
-	let x = delta; //avoid the asymptote
+	let x = delta; // avoid the asymptote
 	for (let i = 0; i < PHI_TABLE_SIZE; i++, x+= delta) {
 		const v = calcPhiSlow(x);
 		table.push(v);
-		//console.log(`${x}: ${v}`);
+		// console.log(`${x}: ${v}`);
 	}
 	return table;
 };

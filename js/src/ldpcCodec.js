@@ -23,7 +23,7 @@ export class LdpcCodec {
 	setRate(rateStr) {
 		const rate = this.codes[rateStr];
 		if (!rate) {
-			throw new Error(`rate '${rateStr}' not found`);
+			throw new Error(`setRate: rate '${rateStr}' not found`);
 		}
 		this.rate = rate;
 	}
@@ -35,7 +35,7 @@ export class LdpcCodec {
 	setLength(lengthStr) {
 		const code = this.rate[lengthStr];
 		if (!code) {
-			throw new Error(`length '${lengthStr}' not found`);
+			throw new Error(`setLength: length '${lengthStr}' not found`);
 		}
 		this.code = code;
 		this.messageBytes = code.messageBits / 8;
@@ -56,7 +56,7 @@ export class LdpcCodec {
 
 	padForShortening(bits) {
 		const len = bits.length;
-		let padLength = this.code.messageBits - len;
+		const padLength = this.code.messageBits - len;
 		const pad = new Array(padLength).fill(0);
 		const obits = bits.concat(pad);
 		return obits;
@@ -103,7 +103,7 @@ export class LdpcCodec {
 		const N = this.code.N
 		let pad = N - mlen;
 		if (pad < 0) {
-			throw new Error(`message too long: ${mlen} > ${N}`);
+			throw new Error(`decode: message too long: ${mlen} > ${N}`);
 		}
 		const parityBits = N - this.code.messageBits;
 		const actualBits = mlen - parityBits;
@@ -113,7 +113,7 @@ export class LdpcCodec {
 		const padded = front.concat(padBits).concat(back);
 		const decoded = this.decoder.decode(padded);
 		if (decoded === null) {
-			throw new Error("decode failed");
+			throw new Error("decode: decode failed");
 		}
 		const final = decoded.slice(0, actualBits);
 		let bytes = Util.bitsToBytesBE(final);
@@ -124,7 +124,7 @@ export class LdpcCodec {
 			bytes = bytes.slice(0, blen - 4);
 			const crc = Crc32.ofBytes(bytes);
 			if (crc !== given) {
-				throw new Error("crc failed");
+				throw new Error("decode: crc failed");
 			}
 		}
 		return bytes;

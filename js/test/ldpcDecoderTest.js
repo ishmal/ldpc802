@@ -40,8 +40,8 @@ describe("LDPC Decoder", () => {
 		const arr = message.slice();
 		const len = arr.length;
 		for (let i = 0; i < nrBits; i++) {
-			let index = (Math.random() * len) | 0; //make sure it is an int
-			arr[i] = arr[index] ^ 1;
+			const index = (Math.random() * len) | 0; //make sure it is an int
+			arr[i] = arr[index] ^ 1;  //flip
 		}
 		return arr;
 	};
